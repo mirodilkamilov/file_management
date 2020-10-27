@@ -50,8 +50,8 @@ int main(void)
 
         case 3:
             getFname(fname);
-            printf("Input an offset from beginning of the file\n");
-            scanf("%d", offset);
+            printf("Input an offset from beginning of the file: ");
+            scanf("%d", &offset);
             fd = open(fname, O_CREAT | O_RDWR, DEF_MODE); //? note there is no O_APPEND bitmask (in order to show lseek)
             int positon = lseek(fd, offset, 0);
             if (positon < 0)
@@ -87,6 +87,7 @@ void writeHandle(int fd, char buf[], char fname[])
     {
         relase(buf);
         int i = 0;
+        printf("\tWrite something in to %s\n", fname);
         char ch = getchar();
         while ((ch = getchar()) != EOF)
             buf[i++] = ch;
