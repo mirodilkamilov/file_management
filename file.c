@@ -11,11 +11,12 @@
 void getFname(char fname[]);
 void relase(char buf[]);
 void writeHandle(int fd, char buf[], char fname[]);
-void readHandle(int fd, char buf[], char fname[]);
+void readHandle(int fd, char buf[], unsigned int buf_size, char fname[]);
 
 int main(void)
 {
     int fd, offset, menu;
+    unsigned int buf_size;
     char buf[520], fname[25];
 
     do
@@ -37,7 +38,8 @@ int main(void)
         case 1:
             getFname(fname);
             fd = open(fname, O_CREAT | O_RDONLY, DEF_MODE);
-            readHandle(fd, buf, fname);
+            buf_size = sizeof(buf) / sizeof(buf[0]); //* n=520 as buf is declared buf[520]
+            readHandle(fd, buf, buf_size, fname);
             break;
 
         case 2:
@@ -66,7 +68,7 @@ int main(void)
 
 void relase(char buf[])
 {
-    for (size_t i = 0; i < sizeof(buf); i++)
+    for (size_t i = 0; i < 520; i++)
     {
         buf[i] = '\0';
     }
@@ -105,12 +107,12 @@ void writeHandle(int fd, char buf[], char fname[])
     }
 }
 
-void readHandle(int fd, char buf[], char fname[])
+void readHandle(int fd, char buf[], unsigned int buf_size, char fname[])
 {
     if (fd > 0)
     {
         relase(buf);
-        int nbytes = read(fd, buf, sizeof(buf));
+        int nbytes = read(fd, buf, buf_size);
         if (nbytes < 0)
         {
             printf("Error occured while reading");

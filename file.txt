@@ -5,3 +5,4 @@ if( access( fname, F_OK ) != -1 ) {
 } else {
     // file doesn't exist
 }
+New line in file.txt
