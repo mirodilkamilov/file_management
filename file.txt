@@ -1,0 +1,7 @@
+Optimus
+
+if( access( fname, F_OK ) != -1 ) {
+    // file exists
+} else {
+    // file doesn't exist
+}
