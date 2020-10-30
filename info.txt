@@ -2,3 +2,4 @@ info.txt Editted
 new lineOptimus writed hereOptimus
 
 new line added
+checking git in new bash
